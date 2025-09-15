@@ -8,23 +8,24 @@ import (
 )
 
 type InMemoryState struct {
-	Store  map[uuid.UUID]message.Message
-	Loaded *message.Message
+	MessageStore map[uuid.UUID]message.Message
+	Loaded       *message.Message
 }
 
 func NewInMemoryState() *InMemoryState {
 
 	return &InMemoryState{
-		Store:  make(map[uuid.UUID]message.Message),
-		Loaded: nil,
+		MessageStore: make(map[uuid.UUID]message.Message),
+		Loaded:       nil,
 	}
 }
 
-func (s *InMemoryState) Load(sessionID uuid.UUID) error {
-	rootMsg, exist := s.Store[sessionID]
+func (s *InMemoryState) Load(sessionID uuid.UUID) (*AgentState, error) {
+	rootMsg, exist := s.MessageStore[sessionID]
 	if !exist {
-		return fmt.Errorf("couldn't find sessionID: %v in storage", sessionID)
+		return nil, fmt.Errorf("couldn't find sessionID: %v in storage", sessionID)
 	}
 	s.Loaded = &rootMsg
-	return nil
+	// TODO (richard): implement this
+	return nil, nil
 }

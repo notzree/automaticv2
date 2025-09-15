@@ -20,13 +20,13 @@ type Agent struct {
 	// concept of turns
 	// user -> http server + sessionID -> Fetch history -> generate next turn -> save turn -> return turn output
 	context AgentContext
-	state   state.AgentState
+	state   state.AgentStateManager
 }
 
 type AgentContext struct {
 }
 
-func NewAgent(aCtx AgentContext, aState state.AgentState) *Agent {
+func NewAgent(aCtx AgentContext, aState state.AgentStateManager) *Agent {
 	return &Agent{
 		context: aCtx,
 		state:   aState,
