@@ -15,10 +15,11 @@ usage() {
   echo "  migrate     - Run goose migration commands"
   printf "\nExamples:\n"
   echo "  - Generate SQLC: $program_name generate"
-  echo "  - Create migration: $program_name migrate create add_some_column -s sql"
+  echo "  - Create migration: $program_name migrate create add_some_column"
   echo "  - Migrate up: $program_name migrate up"
   echo "  - Migrate down: $program_name migrate down"
   echo "  - Goose usage: $program_name migrate -h"
+  printf "\nNote: SQL format (-s sql) and sequential naming (-seq) are automatically added to 'create' commands\n"
 }
 
 # Change to backend directory
@@ -43,6 +44,12 @@ case "$command" in
     ;;
   "migrate")
     shift  # Remove 'migrate' from arguments
+    
+    # Add -s sql -seq automatically for create commands
+    if [ "$1" = "create" ]; then
+      set -- "$@" "-s" "sql"
+    fi
+    
     echo "Running goose migration in $(pwd)/db/migrations..."
     if ! goose -dir "db/migrations" postgres \
       "host=$POSTGRES_HOST user=postgres password=$DB_PASSWORD dbname=$POSTGRES_DB port=5432" "$@"; then
