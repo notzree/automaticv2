@@ -1,0 +1,6 @@
+http_server:
+  http_address: ":8080"
+  handler_timeout_sec: 30
+  read_timeout_sec: 10
+  write_timeout_sec: 10
+  idle_timeout_sec: 120
