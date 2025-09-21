@@ -52,8 +52,8 @@ func (s *Server) RegisterRoutes() {
 // RegisterRoutes sets up all routes using Echo's built-in grouping
 func RegisterRoutes(e *echo.Echo) {
 	// Global middleware
-	e.Use(automatic_http.LoggingMiddleware)
-	e.Use(automatic_http.CORSMiddleware)
+	e.Use(automatic_http.CORSMiddleware())
+	e.Use(automatic_http.LoggingMiddleware())
 
 	// Health check (no group)
 	e.GET("/health", func(c echo.Context) error {
