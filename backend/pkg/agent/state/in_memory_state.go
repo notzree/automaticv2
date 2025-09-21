@@ -29,3 +29,8 @@ func (s *InMemoryState) Load(sessionID uuid.UUID) (*AgentState, error) {
 	// TODO (richard): implement this
 	return nil, nil
 }
+
+func (s *InMemoryState) Snapshot(agentState AgentState) error {
+	// TODO (richard): implement this
+	return nil
+}

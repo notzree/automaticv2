@@ -34,9 +34,9 @@ func NewAgent(aCtx AgentContext, aState state.AgentStateManager) *Agent {
 }
 
 func (a *Agent) LoadFromSession(sessionID string) error {
-	err := a.state.LoadStateFromSession(sessionID)
-	if err != nil {
-		return err
-	}
+	// err := a.state.LoadStateFromSession(sessionID)
+	// if err != nil {
+	// 	return err
+	// }
 	return nil
 }
